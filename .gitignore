@@ -1,0 +1,35 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# dotenv environment variables file
+.env
+.env.test
+.env.local
+.env.development.local
+.env.production.local
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# typescript
+*.tsbuildinfo
+
+# Production
+dist/

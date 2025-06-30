@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "target": "es2022",
+        "declaration": false,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "moduleDetection": "force",
+        "isolatedModules": true,
+
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "rootDir": "src",
+        "outDir": "dist",
+
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+}
