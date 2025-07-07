@@ -9,6 +9,7 @@ import {
 import { TOKEN, CLIENT_ID } from "./utils/config";
 import event from "./events/ready";
 import ping from "./commands/ping";
+import user from "./commands/user";
 import { SlashCommand } from "./types";
 
 if (!TOKEN || !CLIENT_ID) {
@@ -19,9 +20,10 @@ const client = new Client({
     intents: [],
 });
 
-const slashCommandsArr: SlashCommandBuilder[] = [ping.command];
+const slashCommandsArr: SlashCommandBuilder[] = [ping.command, user.command];
 const slashCommands = new Collection<string, SlashCommand>();
 slashCommands.set(ping.command.name, ping);
+slashCommands.set(user.command.name, user);
 
 (async () => {
     try {
