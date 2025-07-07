@@ -1,8 +1,7 @@
 import { Client, Collection, MessageFlags } from "discord.js";
 import { TOKEN, CLIENT_ID } from "./utils/config";
 import event from "./events/ready";
-import ping from "./commands/ping";
-import user from "./commands/user";
+import { botCommands } from "./utils/command-utils";
 import { SlashCommand } from "./types";
 
 if (!TOKEN || !CLIENT_ID) {
@@ -14,9 +13,9 @@ const client = new Client({
 });
 
 const slashCommands = new Collection<string, SlashCommand>();
-slashCommands.set(ping.command.name, ping);
-slashCommands.set(user.command.name, user);
-
+for (const command of botCommands) {
+    slashCommands.set(command.command.name, command);
+}
 client.once(event.name, (...args: any) => event.execute(...args));
 
 client.on("interactionCreate", async (interaction) => {
