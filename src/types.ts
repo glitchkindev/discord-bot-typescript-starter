@@ -12,7 +12,7 @@ export interface BotEvent {
 
 export interface SlashCommand {
     command: SlashCommandBuilder;
-    execute: (interaction: CommandInteraction) => void;
+    execute: (interaction: CommandInteraction) => Promise<void>;
     autocomplete?: (interaction: AutocompleteInteraction) => void;
     cooldown?: number;
 }
