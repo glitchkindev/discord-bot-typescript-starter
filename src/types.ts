@@ -8,6 +8,7 @@ import {
 
 export interface BotEvent {
     name: keyof ClientEvents;
+    once?: boolean;
     execute: (...args: any[]) => void;
 }
 
