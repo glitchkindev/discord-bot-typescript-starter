@@ -3,6 +3,7 @@ import {
     ClientEvents,
     CommandInteraction,
     SlashCommandBuilder,
+    Collection
 } from "discord.js";
 
 export interface BotEvent {
@@ -15,4 +16,10 @@ export interface SlashCommand {
     execute: (interaction: CommandInteraction) => Promise<void>;
     autocomplete?: (interaction: AutocompleteInteraction) => void;
     cooldown?: number;
+}
+
+declare module "discord.js" {
+    interface Client {
+        commands: Collection<string, any>;
+    }
 }

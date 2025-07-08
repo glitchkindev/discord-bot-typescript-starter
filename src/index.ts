@@ -1,6 +1,7 @@
-import { Client, Collection, MessageFlags } from "discord.js";
+import { Client, Collection } from "discord.js";
 import { TOKEN, CLIENT_ID } from "./utils/config";
 import event from "./events/ready";
+import otherEvent from "./events/interactionCreate";
 import { botCommands } from "./utils/command-utils";
 import { SlashCommand } from "./types";
 
@@ -12,39 +13,12 @@ const client = new Client({
     intents: [],
 });
 
-const slashCommands = new Collection<string, SlashCommand>();
+client.commands = new Collection<string, SlashCommand>();
 for (const command of botCommands) {
-    slashCommands.set(command.command.name, command);
+    client.commands.set(command.command.name, command);
 }
 client.once(event.name, (...args: any) => event.execute(...args));
 
-client.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) return;
-    const command = slashCommands.get(interaction.commandName);
-
-    if (!command) {
-        console.error(
-            `No command matching ${interaction.commandName} was found.`
-        );
-        return;
-    }
-
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({
-                content: "There was an error while executing this command!",
-                flags: MessageFlags.Ephemeral,
-            });
-        } else {
-            await interaction.reply({
-                content: "There was an error while executing this command!",
-                flags: MessageFlags.Ephemeral,
-            });
-        }
-    }
-});
+client.on(otherEvent.name, (...args: any) => otherEvent.execute(...args));
 
 client.login(TOKEN);
